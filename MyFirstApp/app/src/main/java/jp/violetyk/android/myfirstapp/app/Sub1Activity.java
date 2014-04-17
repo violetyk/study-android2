@@ -1,14 +1,24 @@
 package jp.violetyk.android.myfirstapp.app;
 
 import android.app.Activity;
+import android.content.ContentValues;
 import android.content.Intent;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.TextView;
+import android.widget.Toast;
 
 
 public class Sub1Activity extends Activity {
+
+    // データベースヘルパーの作成
+    private DatabaseHelper helper = new DatabaseHelper(this);
+    // データベースの宣言
+    public static SQLiteDatabase db;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -22,6 +32,21 @@ public class Sub1Activity extends Activity {
             ((TextView)findViewById(R.id.textName)).setText(name);
             ((TextView)findViewById(R.id.textEmail)).setText(email);
 
+            db = helper.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            values.put("name", name);
+            values.put("email", email);
+            db.insert("addresses", null, values);
+
+            //ちゃんとはいってる？
+            Cursor c = db.rawQuery("SELECT COUNT(_id) FROM addresses;", null);
+            c.moveToFirst();
+            int count = c.getInt(0);
+            c.close();
+
+            String message = String.format("登録しました。現在 %d 件", count);
+//            Toast.makeText(this, getString(R.string.message_registered), Toast.LENGTH_SHORT).show();
+            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
         }
 
     }
@@ -46,5 +71,12 @@ public class Sub1Activity extends Activity {
         }
         return super.onOptionsItemSelected(item);
     }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        helper.close();
+    }
+
 
 }

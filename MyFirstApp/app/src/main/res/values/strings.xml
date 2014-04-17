@@ -9,4 +9,5 @@
     <string name="button_submit">Submit</string>
     <string name="title_activity_sub1">Sub1Activity</string>
 
+    <string name="message_registered">登録しました</string>
 </resources>
