@@ -2,7 +2,7 @@
 <resources>
 
     <string name="app_name">MyCamera</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="button_take">Picture!</string>
     <string name="action_settings">Settings</string>
 
 </resources>
