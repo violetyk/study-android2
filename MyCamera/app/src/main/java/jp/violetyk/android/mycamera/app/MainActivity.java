@@ -2,6 +2,7 @@ package jp.violetyk.android.mycamera.app;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.drawable.Drawable;
 import android.hardware.Camera;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,12 +14,16 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.Gallery;
 import android.widget.TextView;
 
+import java.io.BufferedInputStream;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 
@@ -60,6 +65,24 @@ public class MainActivity extends Activity {
         // カメラリリース
         camera.release();
  */
+
+        // Galleryインスタンスを取得
+        Gallery gallery = (Gallery)findViewById(R.id.gallery);
+
+        // ディレクトリ配下のファイル一覧を取得してDrawableリソースの配列を作成
+        ArrayList<String> imageList = new ArrayList<String>();
+
+//        int[] imgs = new int[];
+
+
+        File dir = this.getFilesDir();
+        for (String file : dir.list()) {
+            imageList.add(dir.getPath() + '/' + file);
+//           Drawable.createFromPath(dir.getPath() + '/' + file);
+        }
+//        Log.d(getPackageName(), imageList.toString());
+        // アダプタをセット
+        gallery.setAdapter(new ImageAdapter(this, imageList));
 
         // フルスクリーンの指定（画面上部のアイコンや時計を非表示にする）
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN);
