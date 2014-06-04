@@ -39,3 +39,8 @@ Android開発の勉強
 - 画像一覧画面
 - 画像個別ビュー
   - 個別ビューで通信とか何かできてもいいかも
+
+## PagerTabStrip
+- Google Play ストア風のアプリ
+  - http://dev.classmethod.jp/smartphone/android/android-tips-36-pagertabstrip/
+
