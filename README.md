@@ -44,3 +44,6 @@ Android開発の勉強
 - Google Play ストア風のアプリ
   - http://dev.classmethod.jp/smartphone/android/android-tips-36-pagertabstrip/
 
+## UseAndroidBootstrap
+- Android-Bootstrapを使って見るテスト
+  - https://github.com/Bearded-Hen/Android-Bootstrap/
